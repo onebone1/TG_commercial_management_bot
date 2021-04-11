@@ -20,7 +20,7 @@ func getClient(config *oauth2.Config) *http.Client {
         // The file token.json stores the user's access and refresh tokens, and is
         // created automatically when the authorization flow completes for the first
         // time.
-        tokFile := "token.json"
+        tokFile := "./sheet/token.json"
         tok, err := tokenFromFile(tokFile)
         if err != nil {
                 tok = getTokenFromWeb(config)
@@ -71,7 +71,7 @@ func saveToken(path string, token *oauth2.Token) {
 }
 
 func Fill_the_sheet(Category string, Type string, Tag string, Price string) {
-        b, err := ioutil.ReadFile("credentials.json")
+        b, err := ioutil.ReadFile("./sheet/credentials.json")
         if err != nil {
                 log.Fatalf("Unable to read client secret file: %v", err)
         }
@@ -88,9 +88,14 @@ func Fill_the_sheet(Category string, Type string, Tag string, Price string) {
                 log.Fatalf("Unable to retrieve Sheets client: %v", err)
         }
 
+	//err = godotenv.Load("./tgbot.env")
+	//if err != nil {
+	//	log.Println(err)
+	//}
+
         // Prints the names and majors of students in a sample spreadsheet:
-        // https://docs.google.com/spreadsheets/d/blablabla/edit
-        spreadsheetId := "blablabla"
+        // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+        spreadsheetId := os.Getenv("spreadsheetID")
 
 	now := time.Now()
 	date := fmt.Sprintf("%d/%02d/%02d\n", now.Year(), now.Month(), now.Day())
