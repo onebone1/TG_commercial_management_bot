@@ -25,7 +25,7 @@ var CategoryKeyboard = tgbotapi.NewInlineKeyboardMarkup (
 		tgbotapi.NewInlineKeyboardButtonData("others", "others"),
 	),
 	tgbotapi.NewInlineKeyboardRow (
-		tgbotapi.NewInlineKeyboardButtonData("cancle", "cancle"),
+		tgbotapi.NewInlineKeyboardButtonData("cancel", "cancel"),
 	),
 )
 
@@ -37,7 +37,7 @@ var TypeKeyboard = tgbotapi.NewInlineKeyboardMarkup (
 	),
 	tgbotapi.NewInlineKeyboardRow (
 		tgbotapi.NewInlineKeyboardButtonData("back to category", "back"),
-		tgbotapi.NewInlineKeyboardButtonData("cancle", "cancle"),
+		tgbotapi.NewInlineKeyboardButtonData("cancel", "cancel"),
 	),
 )
 

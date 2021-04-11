@@ -93,14 +93,14 @@ func (t *TeleBot)createInlineKeyboardMarkup(ChatID int64) {
 
 func (t *TeleBot)inlineKeybaordHandler(ChatID int64, MessageID int, CallBackData string){
         log.Println("CallBackData:", CallBackData)
-        if CallBackData ==  "cancle" {
+        if CallBackData ==  "cancel" {
 		for key, _ := range Stage {
 			Stage[key] = false
 		}
                 edited_text := tgbotapi.NewEditMessageText (
                         ChatID,
                         MessageID,
-                        "cancle this operation",
+                        "cancel this operation",
                 )
                 t.botAPI.Send(edited_text)
 	} else if CallBackData == "back"{
@@ -126,13 +126,21 @@ func (t *TeleBot)inlineKeybaordHandler(ChatID int64, MessageID int, CallBackData
                 )
                 edited_text.ReplyMarkup = &inline.TypeKeyboard
                 t.botAPI.Send(edited_text)
-        } else {
+        } else if Stage["Type" ]{
 		Type = CallBackData
 		Stage["type"] = false
 		Stage["tag"] = true
 		edited_str :=	"Category: " + Category + "\n" +
 				"Type: " + Type + "\n" +
 				"Please enter a tag"
+		edited_text := tgbotapi.NewEditMessageText (
+			ChatID,
+			MessageID,
+			edited_str,
+		)
+		t.botAPI.Send(edited_text)
+	} else {
+		edited_str := "The instruction is canceled.\nPlease enter again."
 		edited_text := tgbotapi.NewEditMessageText (
 			ChatID,
 			MessageID,
@@ -173,11 +181,11 @@ func main() {
 			continue
 		}
 		input := update.Message.Text
-		if input == "/cancle" || input == "/cancle" + Bot_info.Username {
+		if input == "/cancel" || input == "/cancel" + Bot_info.Username {
 			for key, _ := range Stage {
 				Stage[key] = false
 			}
-			teleBot.sendMessage(update.Message.Chat.ID, "All instruction is cancled")
+			teleBot.sendMessage(update.Message.Chat.ID, "All instruction is canceled")
 		} else if input == "/add" || input == "/add" + Bot_info.Username {
 			for key, _ := range Stage {
 				Stage[key] = false
