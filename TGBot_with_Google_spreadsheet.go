@@ -126,7 +126,7 @@ func (t *TeleBot)inlineKeybaordHandler(ChatID int64, MessageID int, CallBackData
                 )
                 edited_text.ReplyMarkup = &inline.TypeKeyboard
                 t.botAPI.Send(edited_text)
-        } else if Stage["Type" ]{
+        } else if Stage["type" ]{
 		Type = CallBackData
 		Stage["type"] = false
 		Stage["tag"] = true
